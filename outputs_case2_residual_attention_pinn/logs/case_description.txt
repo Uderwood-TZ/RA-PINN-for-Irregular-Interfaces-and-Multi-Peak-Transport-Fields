@@ -1,0 +1,31 @@
+Case: case2_residual_attention_pinn
+PDEs on [-1.0, 1.0] x [-1.0, 1.0]
+
+1) u_x + v_y = 0
+2) u u_x + v u_y + p_x - nu (u_xx + u_yy) - c_e phi_x - c_T T_x = f_u
+3) u v_x + v v_y + p_y - nu (v_xx + v_yy) - c_e phi_y - c_T T_y = f_v
+4) u T_x + v T_y - alpha (T_xx + T_yy) - gamma_J (phi_x^2 + phi_y^2) = q_T
+5) phi_xx + phi_yy - lambda_phi phi = s_phi
+
+Case-2 manufactured solution: bipolar steep-gradient / neutral-zone coupled EHD field.
+Core design target: a strong compound gradient concentrated near x = 0 with transverse sign variation in y.
+Representative bipolar profile: sech(beta x) * cos(pi y).
+
+Exact MMS used here:
+psi(x, y) = 0.22 * tanh(5.8 x) * sin(pi y)
+             + 0.1 * sech(4.2 x) * sin(2 pi y) * cos(pi x)
+u = d psi / d y, v = - d psi / d x
+
+p(x, y) = 0.42 * tanh(3.0 x)
+          + 0.55 * sech(5.6 x) * cos(pi y)
+          + 0.16 * sin(pi x) * sin(pi y)
+
+T(x, y) = 0.45 + 0.62 * sech(6.2 x) * cos(pi y)
+          + 0.14 * sin(pi x) * sin(2 pi y)
+
+phi(x, y) = 0.95 * sech(7.5 x) * cos(pi y)
+            + 0.2 * tanh(4.0 x) * sin(2 pi y)
+            + 0.1 * sech(4.125 x) * cos(2 pi y)
+
+This script uses data loss, boundary loss and PDE residual loss with 7:3 train/validation split for supervised MMS data.
+All field maps, absolute error maps, max-error maps, metrics, timing logs and x-y-value text exports are saved separately.

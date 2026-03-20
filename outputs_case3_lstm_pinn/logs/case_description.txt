@@ -1,0 +1,14 @@
+Case: case7_lstm_pinn
+PDEs on [-1.0, 1.0] x [-1.0, 1.0]
+
+1) u_x + v_y = 0
+2) u u_x + v u_y + p_x - nu (u_xx + u_yy) - c_e phi phi_x - c_T T T_x = f_u
+3) u v_x + v v_y + p_y - nu (v_xx + v_yy) - c_e phi phi_y - c_T T T_y = f_v
+4) u T_x + v T_y - alpha (T_xx + T_yy) - gamma_J (phi_x^2 + phi_y^2) = q_T
+5) phi_xx + phi_yy - lambda_phi phi - q(x, y) = s_phi
+
+Exact MMS:
+Case7 uses a multi-peak charge migration field q(x, y) built from several Gaussian peaks plus a sinusoidal perturbation.
+The stream function psi, pressure p, temperature T and electric potential phi are defined in the script and used to construct the source terms.
+
+This script uses data loss, boundary loss and PDE residual loss with 7:3 train/validation split for supervised MMS data.

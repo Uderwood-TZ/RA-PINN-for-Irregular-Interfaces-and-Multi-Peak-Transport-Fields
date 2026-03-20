@@ -1,0 +1,15 @@
+Case: case1_pure_pinn
+PDEs on [-1.0, 1.0] x [-1.0, 1.0]
+
+1) u_x + v_y = 0
+2) u u_x + v u_y + p_x - nu (u_xx + u_yy) - c_e phi_x - c_T T_x = f_u
+3) u v_x + v v_y + p_y - nu (v_xx + v_yy) - c_e phi_y - c_T T_y = f_v
+4) u T_x + v T_y - alpha (T_xx + T_yy) - gamma_J (phi_x^2 + phi_y^2) = q_T
+5) phi_xx + phi_yy - lambda_phi phi = s_phi
+
+Exact MMS:
+psi(x, y) = 0.3 * tanh(3.5 * (x - 0.30 sin(pi y))) * tanh(3.0 * (y + 0.25 cos(pi x))) + 0.12 * sin(pi x) sin(pi y)
+u = d psi / d y, v = - d psi / d x
+p(x, y), T(x, y), phi(x, y) are defined in the script and used to construct source terms.
+
+This script uses data loss, boundary loss and PDE residual loss with 7:3 train/validation split for supervised MMS data.
